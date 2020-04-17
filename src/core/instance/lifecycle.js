@@ -138,6 +138,10 @@ export function lifecycleMixin (Vue: Class<Component>) {
   }
 }
 
+/**
+ * mountComponent 核心就是先实例化一个渲染Watcher，在它的回调函数中会调用 updateComponent 方法
+ * 在此方法中调用 vm._render 方法先生成虚拟 Node，最终调用 vm._update 更新 DOM。
+ */
 export function mountComponent (
   vm: Component,
   el: ?Element,
@@ -194,6 +198,8 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
+  // Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，
+  // 另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数，
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {

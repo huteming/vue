@@ -3,6 +3,12 @@ import { initGlobalAPI } from './global-api/index'
 import { isServerRendering } from 'core/util/env'
 import { FunctionalRenderContext } from 'core/vdom/create-functional-component'
 
+// Vue.config
+// Vue.util
+// Vue.set
+// Vue.delete
+// Vue.nextTick
+// Vue.observable
 initGlobalAPI(Vue)
 
 Object.defineProperty(Vue.prototype, '$isServer', {
